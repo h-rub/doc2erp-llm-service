@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  doc2erp-llm-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: doc2erp-llm-api
+    ports:
+      - "8000:8000"
