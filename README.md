@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 3. Start the server
 ```bash
-uvicorn main:app --reload
+python main.py
 ```
 
 ## Docker execution

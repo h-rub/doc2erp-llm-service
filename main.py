@@ -1,10 +1,11 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import openai
+from openai import OpenAI
 
 # Configuración del cliente OpenAI
-openai.api_key = "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"
+OPEN_AI_API_KEY = "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"
+client = OpenAI(api_key=OPEN_AI_API_KEY)
 
 app = FastAPI()
 
@@ -30,11 +31,7 @@ def gpt_service_header(extracted_text, po, shipto_postal_code, billto_postal_cod
             )
         }
     ]
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-2024-05-13",
-        messages=messages,
-        temperature=0.3
-    )
+    response = client.chat.completions.create(model="gpt-4o-2024-05-13", messages=messages, temperature=0.30)
     return response.choices[0].message.content
 
 def gpt_service_items(extracted_text):
@@ -48,11 +45,7 @@ def gpt_service_items(extracted_text):
             )
         }
     ]
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-2024-05-13",
-        messages=messages,
-        temperature=0.3
-    )
+    response = client.chat.completions.create(model="gpt-4o-2024-05-13", messages=messages, temperature=0.30)
     return response.choices[0].message.content
 
 # Rutas de la API
